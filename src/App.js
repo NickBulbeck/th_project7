@@ -1,15 +1,47 @@
-import './App.css';
+import React, { Component } from 'react';
+import Foties from './components/Foties';
+import SearchForm from './components/SearchForm';
+import MainNav from './components/MainNav'
+import NoResults from './components/NoResults';
+import flickr from './config.js';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Start of project 7.
-        </p>
-      </header>
-    </div>
-  );
+class App extends Component {
+  state = {
+    foties: [],
+    searchTerm: "forever friends bear",
+    key: flickr.key,
+    perPage: 24
+  }
+
+  componentDidMount () {
+    const url = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${this.state.key}&text=%22${this.state.searchTerm}%22&per_page=${this.state.perPage}&format=json&nojsoncallback=1`
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        this.setState({
+          foties: data.photos.photo
+        });
+      })
+      .catch(error => {
+        console.log(`Error in fetch: ${error}`)
+      })
+  }
+
+  render () {
+    return (
+      <div className="container">
+        <SearchForm />
+        <MainNav />
+        {this.state.foties.length > 0 ?
+          <Foties content={this.state.foties}/>
+          :
+          <NoResults />
+        }
+  
+      </div>
+    );
+  }
+
 }
 
 export default App;
