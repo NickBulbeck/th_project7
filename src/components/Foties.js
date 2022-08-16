@@ -8,7 +8,7 @@ const Foties = (props) => {
           {props.content.map((image) => (
             <li key={image.id}>
               <img src={`https://live.staticflickr.com/${image.server}/${image.id}_${image.secret}.jpg`}
-                alt={image.title} />
+                alt={image.title} title={image.title}/>
             </li>
           ))}
         </ul>
