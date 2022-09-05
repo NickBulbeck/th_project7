@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+// import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
+
 import Foties from './components/Foties';
 import SearchForm from './components/SearchForm';
 import MainNav from './components/MainNav'
@@ -10,11 +13,15 @@ class App extends Component {
     foties: [],
     searchTerm: "forever friends bear",
     key: flickr.key,
-    perPage: 24
+    perPage: 24,
+    setSearchTerm: (newSearchTerm) => {
+                      this.setState( {searchTerm: newSearchTerm});
+                      console.log(this.state.searchTerm);
+                    ;}
   }
 
-  componentDidMount () {
-    const url = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${this.state.key}&text=%22${this.state.searchTerm}%22&per_page=${this.state.perPage}&format=json&nojsoncallback=1`
+  search = (searchTerm) => {
+    const url = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${this.state.key}&text=%22${searchTerm}%22&per_page=${this.state.perPage}&format=json&nojsoncallback=1`
     fetch(url)
       .then(response => response.json())
       .then(data => {
@@ -27,18 +34,25 @@ class App extends Component {
       })
   }
 
+  componentDidMount () {
+    this.search(this.state.searchTerm);
+  }
+// Actually need to render routes. The overall structure isn't right.
+
   render () {
     return (
-      <div className="container">
-        <SearchForm />
-        <MainNav />
-        {this.state.foties.length > 0 ?
-          <Foties content={this.state.foties}/>
-          :
-          <NoResults />
-        }
-  
-      </div>
+      <BrowserRouter>
+        <div className="container">
+          <p>{this.state.searchTerm}</p>
+          <SearchForm search={this.search} setSearchTerm={this.state.setSearchTerm}/>
+          <MainNav />
+          {this.state.foties.length > 0 ?
+            <Foties content={this.state.foties} searchTerm={this.state.searchTerm}/>
+            :
+            <NoResults searchTerm={this.state.searchTerm}/>
+          }
+        </div>
+      </BrowserRouter>
     );
   }
 

@@ -18,7 +18,18 @@ The app needs these components:
     - Photo components that have props but no state (and there are
       many of them - hence their being components)
 
-TUESDAY ToDo
-+++++++++++
-- Pass a set-state callback to the buttons
-  
+Next ToDo's
+=============
+
+In the data-fetching course:
+ - what is the component structure?
+    App
+ - where is the fetch implemented?
+    In a function in the App component, it's originally in componentDidMount - like mine.
+    But to implement the search, Guil pulls it out of there and puts it in its ain 
+    function. And the gifs are rendered direct from the app.js. Then, the search function
+    is wired to the SearchForm component by being sent down via props.
+    Moreover, the searchTerm state is in the SearchForm component, not in the App component.
+    The search function, passed in as a prop, is called within the handleSubmit function.
+ - where is the resulting state held?
+ - where are the fotie (or gif) components rendered?

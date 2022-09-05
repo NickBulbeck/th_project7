@@ -1,14 +1,18 @@
 import React from 'react';
+
 // stateless component
 const Foties = (props) => {
   return (
     <div className="photo-container">
-      <h2>Results</h2>
+      <h2>Results for '{props.searchTerm}'</h2>
         <ul>
           {props.content.map((image) => (
             <li key={image.id}>
               <img src={`https://live.staticflickr.com/${image.server}/${image.id}_${image.secret}.jpg`}
-                alt={image.title} title={image.title}/>
+                title={image.title}
+                alt={image.title} >
+              </img>
+
             </li>
           ))}
         </ul>
@@ -17,3 +21,4 @@ const Foties = (props) => {
 }
 
 export default Foties;
+
