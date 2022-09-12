@@ -1,9 +1,6 @@
-// Stateful component
 import React, { Component } from 'react';
 
 class SearchForm extends Component {
-
-  // To get a reference to the search form, see React Router Basics, 4th video.
   handleSubmit = (event) => {
     event.preventDefault();
     let searchTerm = this.searchBox.value.toLowerCase();
@@ -13,6 +10,8 @@ class SearchForm extends Component {
     this.props.search(searchTerm);
     this.props.setSearchTerm(searchTerm);
   }
+
+// Current issue: keeping the browser's history object up to date
 
   render () {
     return (

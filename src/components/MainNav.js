@@ -3,14 +3,20 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 
 class MainNav extends Component {
-  // Think I need routes in here; and I need the state to be in here.
+
+  handleClick = (event) => {
+    let newSearchTerm = event.target.textContent.toLowerCase();
+    this.props.setSearchTerm(newSearchTerm);
+    this.props.search(newSearchTerm);
+  }
+  
   render () {
     return (
       <nav className="main-nav">
         <ul>
-          <li><NavLink to="/trains">Trains</NavLink></li>
-          <li><NavLink to="/bears">Bears</NavLink></li>
-          <li><NavLink to="/mountains">Mountains</NavLink></li>
+          <li onClick={this.handleClick}><NavLink to="/torridon">Torridon</NavLink></li>
+          <li onClick={this.handleClick}><NavLink to="/fisherfield">Fisherfield</NavLink></li>
+          <li onClick={this.handleClick}><NavLink to="/cuillin">Skye Cuillin</NavLink></li>
         </ul>
       </nav>
     )

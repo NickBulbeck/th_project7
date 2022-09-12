@@ -8,28 +8,40 @@ Thirdly, when two more more components need access to the same state, we put it 
 
 Fourthly, when a child component does need to modify state stored above it, you can design it to do so by passing a callback to it via props.
 
-Design notes
-++++++++++++
-The app needs these components:
- - A form (which has state - the search term)
- - A main nav (which officially is stateless, but I could soup up
-    with random search terms)
- - A photo-container div that is stateless, containing:
-    - Photo components that have props but no state (and there are
-      many of them - hence their being components)
+Routing
++++++++
+A single-page app is one big bundle of webpack js, html and css. It doesn't reload as the user navigates
+around it. The idea is that it may take a bit of time to load, but once it's loaded it works a bit like 
+a desktop app; only occasionally requesting data fae elsewhere (like, the server that served it in the 
+first place) in response to user actions. The routes in this context determine what components are 
+rendered, and the posting of stuff in the browser is really just a dodge - you're not really sending
+browser requests. It matches a url to the set of components being rendered and, in that way, keeps the
+rendering in sync with what a user would expect if they were on a website.
+The BrowserRouter component (probably via implicit props and state) keeps all the wean components inside
+it up to date with what the route is.
 
-Next ToDo's
+IDEA TO TRY NEXT
+================
+Render the Foties from inside a container component that sets its own hard-coded
+search term.
+
+  Monday ToDo's:
+   - A Home, Trains, Mountains and Bears component (Home could be removed in favour of a default, later maybe)
+
+Major routing questions
+=======================
+ - Where are the routes actually declared?
+ - How are the NavLink elements linked to the routes?
+ - How do I get clicking the nav links to conduct a search?
+ - How do I get the search function to display/edit the url?
+ - How do I implement the search route, and what does the Search link do?
+    - There is no search route - just a button. The instructions are a bit ambiguous here, I think.
+
+
+Smaller ToDo's
 =============
 
-In the data-fetching course:
- - what is the component structure?
-    App
- - where is the fetch implemented?
-    In a function in the App component, it's originally in componentDidMount - like mine.
-    But to implement the search, Guil pulls it out of there and puts it in its ain 
-    function. And the gifs are rendered direct from the app.js. Then, the search function
-    is wired to the SearchForm component by being sent down via props.
-    Moreover, the searchTerm state is in the SearchForm component, not in the App component.
-    The search function, passed in as a prop, is called within the handleSubmit function.
- - where is the resulting state held?
- - where are the fotie (or gif) components rendered?
+ - Pictures of The Bears for the no-results page
+ - Small delay for the "loading" display
+ - Updated function to deal with cats!
+ 
