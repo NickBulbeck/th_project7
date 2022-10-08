@@ -7,6 +7,7 @@ class SearchForm extends Component {
     if (searchTerm === 'cat' || searchTerm === 'cats') {
       searchTerm = "cambridge punting";
     }
+    console.log("Search component searchterm: ", searchTerm)
     this.props.search(searchTerm);
     this.props.setSearchTerm(searchTerm);
   }

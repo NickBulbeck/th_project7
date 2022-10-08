@@ -8,6 +8,7 @@ import Torridon from './components/Torridon';
 import Fisherfield from './components/Fisherfield';
 import Cuillin from './components/Cuillin';
 import Loading from './components/Loading';
+import NotFound from './components/NotFound';
 import flickr from './config.js';
 
 
@@ -18,13 +19,11 @@ class App extends Component {
     key: flickr.key,
     perPage: 24,
     loading: false,
-    setSearchTerm: (newSearchTerm) => {
-                      this.setState( {searchTerm: newSearchTerm});
-                    ;}
   }
 
   setSearchTerm = (newSearchTerm) => {
     this.setState({searchTerm: newSearchTerm});
+    console.log(`In the App component; searchTerm has been set to ${this.state.searchTerm}`);
   }
 
   search = (searchTerm) => {
@@ -49,6 +48,8 @@ class App extends Component {
 // Actually need to render routes. The overall structure isn't right.
 
   render () {
+    console.log(`At the start of the app: `);
+    console.log(this.location);
     if (this.state.loading) {
       return(
         <Loading />
@@ -61,10 +62,11 @@ class App extends Component {
           <SearchForm search={this.search} setSearchTerm={this.setSearchTerm}/>
           <MainNav search={this.search} setSearchTerm={this.setSearchTerm}/>
           <Routes>
-            <Route exact path="/" element={<Home content={this.state.foties} />} />
-            <Route path="/torridon" element={<Torridon content={this.state.foties} />} />
-            <Route path="/fisherfield" element={<Fisherfield content={this.state.foties} />} />
-            <Route path="/cuillin" element={<Cuillin content={this.state.foties} />} />
+              <Route exact path="/" element={<Home content={this.state.foties} />} />
+              <Route path="/torridon" element={<Torridon content={this.state.foties} />} />
+              <Route path="/fisherfield" element={<Fisherfield content={this.state.foties} />} />
+              <Route path="/cuillin" element={<Cuillin content={this.state.foties} />} />
+              <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
       </BrowserRouter>

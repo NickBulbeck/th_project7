@@ -4,6 +4,9 @@ import NoResults from './NoResults';
 
 // stateless component
 const Foties = (props) => {
+  console.log("Logging the Foties props:");
+  console.log(props);
+  console.log("Completed logging the Foties props.")
   if (props.content.length === 0) {
     return (
       <NoResults />
@@ -12,7 +15,7 @@ const Foties = (props) => {
   return (
     <div className="photo-container">
       <p>IMPORTANT DISCLAIMER</p>
-      <p>Please note that flickr is not google images. Nick Bulbeck And The Bears Productions cannot be held
+      <p>Nick Bulbeck And The Bears Productions cannot be held
          responsible for the weird stuff that the flickr api search method digs up, which may or may not have
          anything to do with the search term.</p>
       <h2>Results for '{props.searchTerm}'</h2>

@@ -20,13 +20,17 @@ rendering in sync with what a user would expect if they were on a website.
 The BrowserRouter component (probably via implicit props and state) keeps all the wean components inside
 it up to date with what the route is.
 
-IDEA TO TRY NEXT
+Observed bugs
 ================
-Render the Foties from inside a container component that sets its own hard-coded
-search term.
+The search bar DOES conduct a search, and displays the results. But:
+a) It's NOT sync'd with the search term - this does not change
+b) It's NOT sync'd with the url - the back button does not change the foties
+c) It's also the case that changing the URL does not impact the app
 
-  Monday ToDo's:
-   - A Home, Trains, Mountains and Bears component (Home could be removed in favour of a default, later maybe)
+Note that the search component sets the search foties themselves, BUT the function passed
+in via props is NOT setting the searchTerm.
+
+Consider the redirect component (React Router, block 2/3, video 5) for a default route.
 
 Major routing questions
 =======================
